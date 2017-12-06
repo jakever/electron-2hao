@@ -18,9 +18,12 @@ os:
 cache:
   directories:
   - node_modules
+  
+install:
+  - npm install
 
 script:
-  - node build
+  - npm run build
 
 deploy:
   provider: releases
@@ -31,7 +34,9 @@ deploy:
     - releases/*.deb
     - releases/*.dmg
     - releases/*.exe
-  skip_cleanup: true
+  skip_cleanup: true,
+  on:
+    tags: true
 
 branches:
   only:
