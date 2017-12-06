@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>2号人事部</title>
+</head>
+<body>
+    <!-- <script>document.write(process.versions.electron)</script> -->
+    <webview id="2hao"
+        webpreferences="nativeWindowOpen=yes"
+        src="https://www.2haohr.com/login"
+        style="position:fixed;left:0;top:0;width:100%; height:100%">
+     </webview>
+</body>
+
+<script>
+    require('./renderer.js')
+</script>
+</html>

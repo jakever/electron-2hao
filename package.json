@@ -1,0 +1,67 @@
+{
+  "name": "2HaoHR",
+  "version": "1.0.0",
+  "description": "A 2HaoHR Electron application",
+  "main": "dist/main.js",
+  "title": "2号人事部",
+  "scripts": {
+    "babel": "babel app -d dist",
+    "start": "npm run babel && electron .",
+    "build": "npm run babel && electron-builder --config"
+  },
+  "build": {
+    "productName": "2号人事部",
+    "directories": {
+      "output": "releases"
+    },
+    "appId": "com.eebochina.webehr",
+    "files": [
+      "**/*",
+      "build/icon.*"
+    ],
+    "linux": {
+      "target": "deb"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "dmg": {
+      "iconSize": 60,
+      "window": {
+        "width": 550,
+        "height": 400
+      }
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "keywords": [
+    "Electron",
+    "2HaoHR",
+    "DianmiFE"
+  ],
+  "author": {
+    "email": "sunzongzheng@dianmi365.com",
+    "url": "https://www.2haohr.com",
+    "name": "2号人事部 All Rights Reserved | 粤ICP备12040237号-2"
+  },
+  "homepage": "https://www.2haohr.com/login",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "electron": "^1.6.11",
+    "electron-builder": "^19.6.3",
+    "node-notifier": "^5.1.2"
+  },
+  "dependencies": {
+    "auto-updater": "^1.0.2",
+    "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
+    "get-package-json-from-github": "^1.2.1"
+  }
+}
