@@ -34,9 +34,7 @@ deploy:
     - releases/*.deb
     - releases/*.dmg
     - releases/*.exe
-  skip_cleanup: true,
-  on:
-    tags: true
+  skip_cleanup: true
 
 branches:
   only:
