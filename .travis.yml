@@ -1,55 +1,56 @@
 osx_image: xcode8.3
-
 dist: trusty
 sudo: true
-
 language: node_js
-node_js: "8"
-
+node_js: '8'
 env:
   global:
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
+  - ELECTRON_CACHE=$HOME/.cache/electron
+  - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 os:
-  - linux
-  - osx
-
+- linux
+- osx
 cache:
   directories:
   - node_modules
-  
 install:
-  - npm install
-
+- npm install
 script:
-  - npm run build
-
+- npm run build
 after_script:
-  - cd ./dist
-  - git init
-  - git config user.name "${U_NAME}"
-  - git config user.email "${U_EMAIL}"
-  - git add .
-  - git commit -m "Update something"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
-  
+- cd ./dist
+- git init
+- git config user.name "${U_NAME}"
+- git config user.email "${U_EMAIL}"
+- git add .
+- git commit -m "Update something"
+- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
 deploy:
   provider: releases
   api_key:
-    secure: H+IUNQMrPYStzANqUqe2J1v/Dc1W97ULgj+93MtFU7rawX/fbW0Pkhvy+nWikIr8mWMzeJwyv9OOTwVG7h6BWgw0YxmNZgDj2i9pybVNKfFKjOJMOZr+G0PrwlMecl3V8dTsVZ+QwCf2JyVIUiTrfFcGb7Z+Xtx3F1D/8FQRdpnZt7N3xT2NcCF7toLwQ+9kvSgq8durWCA3z7mtLMcuf5kEVQBg/FY2utbcSTtG1gaBcZY5OrxAmzxAqku5QtnpbpgHtpsQur+EDrwRwuEHySnRlLIUsxPIcrkJNMklnWW/N1qkfde+xTB4PLQQ06juCx+NWH2oxcMGyNE7jPw60mIdrJJTGJ+395vwYfG5Vs8Xi0C7NV/BT5Pm2qBJPQJlNSrgfWOK7rSOoaVxRyBnC9BuVV0VbjDWX+oTHsIHFf10THmJyEUwn7KJpxdLvOpGKAFKAUH12yBe7CxDI43WD7hZBO0wIA7YLw8luEKvRCulF7aB75UPS0bj62H/NUnCh0wv9IcwR/hmTw4DD0dXv3foiUcIenFmle0OiEXa54gIc+a2+2cY4DMNAfYmn09Y2aTARDdKlQb1hMAAzBTrHER8pfm+n2OtuPGZxyIdu/7fkT9Wxsuiap67CsT33oWyZmalQdJZFZ5snZy0VS3KF897t3x/Dnqf/xN2HolkzKA=
+    secure: RuOyARfF4SN6WByAmwbKdzhcRoTLHYMhmCtRyVwmukl6luouRCcv5ZlzZVWVimMbRInm7LFH+0ThpA2zNlVIRJS0Jc6ey8vge94qQ3JHSbduWtRStoa0nvZpSaWg42BpXztS7i+B2NzAsHJYmY+D0DKmaC+oTo6eDf5lyWxXhUhPo4KfV8u55UJYdoBYtjqbgngcWaD1RF9sdiBeoOxgtEETjvyvgb/5m+QURev1LKRsS8/pxQQPTV/BmOgxlYZURjwJo7Ip9Q31/8icXbD/OwkVK8JNmfpRyx8RXHl/zn2baGYtH1mwxfrjHMJlIPqtH3j4i+HN1s5WOtfrGOVUILXd0AX3a7M3IWD3WyxybrkmgZ72U9Yyg6Xn3k2s8S52Cxn+i7vIT6oIvv7k4ghsH/o8jEO1yZ75jT6RnJfIn4E4qnDEwYNtNLnMrtAkYjPdoeQK2CYhKXG3BqlotoEk6VnJgrwhFanusv+F/Yn159NroypR5BuNz61TZZC40/e2knDJvvumAxxN20s0gzyYpl5sJZJNoDepGgsRU9IuNzqqCIFVOBFIKpFqLqfPKHuU56oJ4mroeZBKVlsB9AjoOckRe2nwoIyFRsWov+6j8poMvw7IxUPBUvmKv84+IYbEWTIjE82wG8GHjE9pLoX6M7vTsHd39/4S3hHbHaBzj3s=
   file_glob: true
   file:
-    - releases/*.exe
-    - releases/*.deb
-    - releases/*.dmg
+  - releases/*.exe
+  - releases/*.deb
+  - releases/*.dmg
   skip_cleanup: true
   on:
     tags: true
-
 branches:
   only:
   - master
-  
 notifications:
   email: false
+before_install:
+- openssl aes-256-cbc -K $encrypted_86ca61108fc1_key -iv $encrypted_86ca61108fc1_iv
+  -in id_rsa.enc -out id_rsa -d
+# 改变文件权限
+- chmod 600 ~/.ssh/id_rsa 
+# 配置 ssh
+- eval $(ssh-agent)
+- ssh-add ~/.ssh/id_rsa
+- cp .travis/ssh_config ~/.ssh/config
+# 配置 git 替换为自己的信息
+- git config --global user.name 'luanhualiang'
+- git config --global user.email hualiang_luan@163.com
