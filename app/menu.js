@@ -68,18 +68,7 @@ export default (app,main)=> {
              submenu: [
                 {role: 'about', label: '关于2号人事部'},
                 {label: '检查更新', click: function(){
-                    checkUpdate().then((data)=> {
-                        // if(!data.has){ //没有更新
-                        //      dialog.showMessageBox({
-                        //          type: 'info',
-                        //          title: '检查更新',
-                        //          detail: '您已经安装了最新版本的2号人事部',
-                        //          buttons: ['知道了'],
-                        //          noLink: false,
-                        //          defaultId: 0
-                        //      })
-                        // }
-                    })
+                    checkUpdate()
                 }},
                 {role: 'hide', label: '隐藏2号人事部', accelerator: 'CmdOrCtrl+H'},
                 {role: 'hideothers', label: '隐藏其他', accelerator: 'Shift+CmdOrCtrl+H'},
@@ -93,19 +82,7 @@ export default (app,main)=> {
             submenu: [
             //    {role: 'about', label: '关于2号人事部'},
                {label: '检查更新', click: function(){
-                   checkUpdate().then((data)=> {
-                       if(!data.has){ //没有更新
-                            dialog.showMessageBox({
-                                type: 'info',
-                                title: '检查更新',
-                                detail: '您已经安装了最新版本的2号人事部',
-                                buttons: ['知道了'],
-                                noLink: false,
-                                defaultId: 0,
-                                icon: path.resolve(__dirname,'../build/icon.ico')
-                            })
-                       }
-                   })
+                   checkUpdate()
                }},
                {role: 'quit', label: '退出', accelerator: 'CmdOrCtrl+Q'}
             ]

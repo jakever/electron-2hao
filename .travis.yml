@@ -1,4 +1,4 @@
-osx_image: xcode8.3
+osx_image: xcode9.0
 dist: trusty
 sudo: true
 language: node_js
@@ -16,7 +16,7 @@ cache:
 # install:
 # - npm install
 script:
-- npm run build:win
+- node build
 # after_script:
 # - cd ./dist
 # - git init
@@ -38,7 +38,7 @@ deploy:
   on:
     tags: true
   overwrite: true
-  
+
 branches:
   only:
   - master
