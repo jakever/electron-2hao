@@ -32,7 +32,6 @@ deploy:
   file_glob: true
   file:
   - releases/*.exe
-  - releases/*.deb
   - releases/*.dmg
   skip_cleanup: true
   on:

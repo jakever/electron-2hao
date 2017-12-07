@@ -1,6 +1,6 @@
 {
   "name": "2HaoHR",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "A 2HaoHR Electron application",
   "main": "dist/main.js",
   "title": "2号人事部",
