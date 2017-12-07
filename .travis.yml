@@ -16,7 +16,7 @@ cache:
 # install:
 # - npm install
 script:
-- node build
+- npm run build:win
 # after_script:
 # - cd ./dist
 # - git init
@@ -32,9 +32,13 @@ deploy:
   file_glob: true
   file:
   - releases/*.exe
+  - releases/*.deb
+  - releases/*.dmg
   skip_cleanup: true
   on:
     tags: true
+  overwrite: true
+  
 branches:
   only:
   - master
