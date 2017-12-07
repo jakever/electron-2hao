@@ -6,8 +6,10 @@
   "title": "2号人事部",
   "scripts": {
     "babel": "babel app -d dist",
+    "update": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install",
     "start": "npm run babel && electron .",
-    "build": "npm run babel && electron-builder --config"
+    "build": "npm run babel && electron-builder --publish onTagOrDraft",
+    "build:win": "npm run babel && electron-builder --win --publish onTagOrDraft"
   },
   "build": {
     "productName": "2号人事部",

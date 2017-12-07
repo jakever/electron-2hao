@@ -16,7 +16,7 @@ cache:
 # install:
 # - npm install
 script:
-- npm run build
+- node build
 # after_script:
 # - cd ./dist
 # - git init
