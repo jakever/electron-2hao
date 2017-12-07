@@ -13,18 +13,18 @@ os:
 cache:
   directories:
   - node_modules
-install:
-- npm install
+# install:
+# - npm install
 script:
 - npm run build
-after_script:
-- cd ./dist
-- git init
-- git config user.name "${U_NAME}"
-- git config user.email "${U_EMAIL}"
-- git add .
-- git commit -m "Update something"
-- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
+# after_script:
+# - cd ./dist
+# - git init
+# - git config user.name "${U_NAME}"
+# - git config user.email "${U_EMAIL}"
+# - git add .
+# - git commit -m "Update something"
+# - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
 deploy:
   provider: releases
   api_key:
