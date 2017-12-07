@@ -8,8 +8,8 @@
     "babel": "babel app -d dist",
     "update": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install",
     "start": "npm run babel && electron .",
-    "build": "npm run babel && electron-builder --publish onTagOrDraft",
-    "build:win": "npm run babel && electron-builder --win --publish onTagOrDraft"
+    "build": "npm run babel && electron-builder --publish=always",
+    "build:win": "npm run babel && electron-builder --win --publish=always"
   },
   "build": {
     "productName": "2号人事部",
@@ -57,7 +57,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "electron": "^1.6.11",
-    "electron-builder": "^19.6.3",
+    "electron-builder": "^19.48.2",
     "node-notifier": "^5.1.2"
   },
   "dependencies": {
