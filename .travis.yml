@@ -44,6 +44,8 @@ deploy:
     - releases/*.deb
     - releases/*.dmg
   skip_cleanup: true
+  on:
+    tags: true
 
 branches:
   only:
