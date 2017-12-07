@@ -42,15 +42,15 @@ branches:
   - master
 notifications:
   email: false
-before_install:
-- openssl aes-256-cbc -K $encrypted_86ca61108fc1_key -iv $encrypted_86ca61108fc1_iv
-  -in id_rsa.enc -out id_rsa -d
-# 改变文件权限
-- chmod 600 ~/.ssh/id_rsa 
-# 配置 ssh
-- eval $(ssh-agent)
-- ssh-add ~/.ssh/id_rsa
-- cp .travis/ssh_config ~/.ssh/config
-# 配置 git 替换为自己的信息
-- git config --global user.name 'luanhualiang'
-- git config --global user.email hualiang_luan@163.com
+# before_install:
+# - openssl aes-256-cbc -K $encrypted_86ca61108fc1_key -iv $encrypted_86ca61108fc1_iv
+#   -in id_rsa.enc -out id_rsa -d
+# # 改变文件权限
+# - chmod 600 ~/.ssh/id_rsa 
+# # 配置 ssh
+# - eval $(ssh-agent)
+# - ssh-add ~/.ssh/id_rsa
+# - cp .travis/ssh_config ~/.ssh/config
+# # 配置 git 替换为自己的信息
+# - git config --global user.name 'luanhualiang'
+# - git config --global user.email hualiang_luan@163.com
