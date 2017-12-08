@@ -12,7 +12,7 @@
     "build:win": "npm run babel && electron-builder --win --publish=always"
   },
   "build": {
-    "productName": "2-号人事部",
+    "productName": "2号人事部",
     "directories": {
       "output": "releases"
     },
