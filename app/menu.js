@@ -80,7 +80,6 @@ export default (app,main)=> {
         menus.unshift({
             label: '2号人事部',
             submenu: [
-               {role: 'about', label: '关于2号人事部'},
                {label: '检查更新', click: function(){
                    checkUpdate()
                }},
