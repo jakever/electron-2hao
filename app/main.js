@@ -60,15 +60,15 @@ function createWindow() {
         mainWindow = null
         tray.destroy();
     })
-    mainWindow.webContents.on('did-frame-finish-load', function() {
-        if(!checked){ //仅首次加载需要自动检测更新
-            checkUpdate().then((data)=>{
-                if(data.checked){
-                    checked = true
-                }
-            });
-        }
-    });
+    // mainWindow.webContents.on('did-frame-finish-load', function() {
+    //     if(!checked){ //仅首次加载需要自动检测更新
+    //         checkUpdate().then((data)=>{
+    //             if(data.checked){
+    //                 checked = true
+    //             }
+    //         });
+    //     }
+    // });
     tray = new mTray(app,mainWindow)
     menu(app,mainWindow)
     app.setLoginItemSettings({ //设置开启启动
