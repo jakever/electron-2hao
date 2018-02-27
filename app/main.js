@@ -36,7 +36,7 @@ function createWindow() {
             defaultFontSize: 14
         }
     })
-    mainWindow.loadURL('http://localhost:16001/login')
+    mainWindow.loadURL('https://2haohr.com/login')
     // mainWindow.loadURL(url.format({
     //     pathname: resolve('../app/index.html'),
     //     protocol: 'file:',
