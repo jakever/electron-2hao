@@ -95,6 +95,10 @@ function createWindow() {
                     encoding: 'binary'
                 }, (error,reponse,data)=> {
                     let fp = path.resolve(app.getPath('downloads'), fname)
+                    let s = path.parse(fp).ext
+                    if(!s){
+                        fp += ext
+                    }
                     fs.writeFileSync(fp,data,'binary')
                 })
             }
