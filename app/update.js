@@ -13,7 +13,7 @@ let config = {
     defaultId: 0
 }
 export default ()=> {
-    return Promise.resolve(axios.get('https://test.2haohr.com/update.json').then(function(response) {
+    return Promise.resolve(axios.get('https://2haohr.com/update.json').then(function(response) {
     // return Promise.resolve(getJson('git+https://github.com/jakever/electron-2hao.git').then(data=> {
         let version = response.data.version;
         // if(process.platform !== 'darwin'){
