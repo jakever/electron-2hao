@@ -73,36 +73,37 @@ function createWindow() {
     // });
     //客户端对于下载文件重命名时，对于文件扩展名的处理会不那么友好，做如下处理
     mainWindow.webContents.session.on('will-download', (e, item) => {
-        e.preventDefault()
         //获取文件的总大小
         const totalBytes = item.getTotalBytes();
-        
         //设置文件的保存路径，此时默认弹出的 save dialog 将被覆盖
         const fileName = item.getFilename()
         const filePath = path.resolve(app.getPath('downloads'), item.getFilename())
         const fileUrl = item.getURL()
         const ext = path.parse(filePath).ext
-        dialog.showSaveDialog({
-            defaultPath: filePath,
-            nameFieldLabel: fileName,
-            filters: [
-                { name: fileName, extensions: ext }
-            ]
-        }, fname => {
-            if(fname){
-                request.get({
-                    uri: fileUrl,
-                    encoding: 'binary'
-                }, (error,reponse,data)=> {
-                    let fp = path.resolve(app.getPath('downloads'), fname)
-                    let s = path.parse(fp).ext
-                    if(!s){
-                        fp += ext
-                    }
-                    fs.writeFileSync(fp,data,'binary')
-                })
-            }
-        });
+        if(ext != '.png'){ //图片下载还是使用原生浏览器的下载方式
+            e.preventDefault()
+            dialog.showSaveDialog({
+                defaultPath: filePath,
+                nameFieldLabel: fileName,
+                filters: [
+                    { name: fileName, extensions: ext }
+                ]
+            }, fname => {
+                if(fname){
+                    request.get({
+                        uri: fileUrl,
+                        encoding: 'binary'
+                    }, (error,reponse,data)=> {
+                        let fp = path.resolve(app.getPath('downloads'), fname)
+                        let s = path.parse(fp).ext
+                        if(!s){
+                            fp += ext
+                        }
+                        fs.writeFileSync(fp,data,'binary')
+                    })
+                }
+            });
+        }
     });
     tray = new mTray(app,mainWindow)
     menu(app,mainWindow)
