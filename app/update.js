@@ -14,11 +14,7 @@ let config = {
 }
 export default ()=> {
     return Promise.resolve(axios.get('https://2haohr.com/update.json').then(function(response) {
-    // return Promise.resolve(getJson('git+https://github.com/jakever/electron-2hao.git').then(data=> {
         let version = response.data.version;
-        // if(process.platform !== 'darwin'){
-        //     config.icon = path.resolve(__dirname,'../build/smallicon.ico')
-        // }
         if(appVersion < version){ //有新版本
             config.buttons = ['暂不更新','去更新'];
             config.detail = '有新版本的2号人事部啦';
@@ -36,27 +32,4 @@ export default ()=> {
     }).catch(function(e) {
         console.log(e);
     }))
-
-    // return Promise.resolve(getJson('git+https://github.com/electron/electron.git').then(data=> {
-    //     if(process.platform !== 'darwin'){
-    //         config.icon = path.resolve(__dirname,'../build/icon.ico')
-    //     }
-    //     if(appVersion<data.version){ //有新版本
-    //         config.buttons = ['暂不更新','去更新'];
-    //         config.detail = '有新版本的2号人事部啦';
-    //         config.defaultId = 1;
-    //         dialog.showMessageBox(config, function(cancelId, f){
-    //             if(cancelId){
-    //                 shell.openExternal('https://www.2haohr.com/client.html')
-    //             }
-    //         })
-    //     }else{
-    //         dialog.showMessageBox(config, function(cancelId, f){
-    //             console.log(cancelId)
-    //         })
-    //     }
-    //     return true
-    // }).catch((err)=> {
-    //     console.log(err)
-    // }))
 }

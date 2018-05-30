@@ -80,7 +80,7 @@ function createWindow() {
         const filePath = path.resolve(app.getPath('downloads'), item.getFilename())
         const fileUrl = item.getURL()
         const ext = path.parse(filePath).ext
-        if(ext != '.png'){ //图片下载还是使用原生浏览器的下载方式
+        if(ext != '.png' && ext != '.pdf'){ //图片、PDF下载还是使用原生浏览器的下载方式
             e.preventDefault()
             dialog.showSaveDialog({
                 defaultPath: filePath,
