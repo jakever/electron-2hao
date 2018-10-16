@@ -1,6 +1,5 @@
 //检查版本更新
 import axios from 'axios'
-import getJson from 'get-package-json-from-github'
 import {app, dialog, shell} from 'electron'
 import path from 'path'
 const appVersion = app.getVersion() //当前版本号

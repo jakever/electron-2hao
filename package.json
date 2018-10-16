@@ -1,6 +1,6 @@
 {
   "name": "2HaoHR",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "A 2HaoHR Electron application",
   "main": "dist/main.js",
   "title": "2号人事部",
@@ -9,7 +9,9 @@
     "update": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install",
     "start": "npm run babel && electron .",
     "build": "npm run babel && electron-builder --publish=always",
-    "build:win": "npm run babel && electron-builder --win --publish=always"
+    "build:win": "electron-builder --win --publish=always",
+    "build:mac": "electron-builder --mac --publish=always",
+    "build:linux": "electron-builder --linux --publish=always"
   },
   "build": {
     "productName": "2号人事部",
@@ -57,16 +59,15 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
-    "electron": "^1.6.11",
+    "electron": "^3.0.4",
     "electron-builder": "^19.48.2",
     "node-notifier": "^5.1.2"
   },
   "dependencies": {
-    "auto-updater": "^1.0.2",
-    "axios": "^0.16.2",
     "babel-polyfill": "^6.23.0",
+    "auto-launch": "^5.0.5",
+    "axios": "^0.16.2",
     "fs": "0.0.1-security",
-    "get-package-json-from-github": "^1.2.1",
     "request": "^2.83.0",
     "shelljs": "^0.7.8"
   }

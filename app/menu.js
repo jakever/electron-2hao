@@ -1,7 +1,11 @@
-import {Menu, shell, dialog} from 'electron'
+import { Menu, shell } from 'electron'
 import checkUpdate from './update'
-import path from 'path'
-export default (app,main)=> {
+import AutoLaunch from 'auto-launch'
+const appLauncher = new AutoLaunch({
+    name: '2号人事部'
+})
+
+export default async (app, main)=> {
     let menus = [
         {
             label: '编辑',
@@ -38,21 +42,15 @@ export default (app,main)=> {
         {
             label: '视图',
             submenu: [
-                {role: 'reload', label: '刷新', accelerator: 'CmdOrCtrl+R'},
-                {role: 'zoomin', label: '放大', accelerator: 'CmdOrCtrl+Plus'},
-                {role: 'zoomout', label: '缩小', accelerator: 'CmdOrCtrl+-'},
-                {role: 'resetzoom', label: '实际大小', accelerator: 'CmdOrCtrl+0'},
-                {role: 'togglefullscreen', label: '全屏'}
+                {label: '刷新', role: 'reload', accelerator: 'CmdOrCtrl+R'},
+                {label: '放大', role: 'zoomin', accelerator: 'CmdOrCtrl+Plus'},
+                {label: '缩小', role: 'zoomout', accelerator: 'CmdOrCtrl+-'},
+                {label: '实际大小', role: 'resetzoom', accelerator: 'CmdOrCtrl+0'},
+                {label: '全屏', role: 'togglefullscreen'},
+                {label: '状态栏', role: 'toggleTabBar'},
+                {label: '开发者工具', role: 'toggleDevTools'}
             ]
         },
-        // {
-        //      role: 'window',
-        //      label: '窗口',
-        //      submenu: [
-        //          {role: 'minimize', label: '最小化'},
-        //          {role: 'close', label: '关闭'}
-        //      ]
-        //  },
          {
              label: '帮助',
              submenu: [
@@ -67,12 +65,23 @@ export default (app,main)=> {
              label: app.getName(),
              submenu: [
                 {role: 'about', label: '关于2号人事部'},
-                {label: '检查更新', click: function(){
+                {label: '检查更新', click: function() {
                     checkUpdate()
                 }},
                 {role: 'hide', label: '隐藏2号人事部', accelerator: 'CmdOrCtrl+H'},
                 {role: 'hideothers', label: '隐藏其他', accelerator: 'Shift+CmdOrCtrl+H'},
                 {role: 'unhide', label: '显示全部'},
+                {label: '开机启动', click: async function() {
+                    let enabled = await appLauncher.isEnabled()
+                    if(enabled) {
+                        return appLauncher.disable()
+                    } else {
+                        return appLauncher.enable()
+                    }
+                }, 
+                type: 'checkbox',
+                checked: await appLauncher.isEnabled()
+                },
                 {role: 'quit', label: '退出', accelerator: 'CmdOrCtrl+Q'}
              ]
          })
@@ -83,6 +92,17 @@ export default (app,main)=> {
                {label: '检查更新', click: function(){
                    checkUpdate()
                }},
+               {label: '开机启动', click: async function() {
+                    let enabled = await appLauncher.isEnabled()
+                    if(enabled) {
+                        return appLauncher.disable()
+                    } else {
+                        return appLauncher.enable()
+                    }
+                }, 
+                type: 'checkbox',
+                checked: await appLauncher.isEnabled()
+                },
                {role: 'quit', label: '退出', accelerator: 'CmdOrCtrl+Q'}
             ]
         })

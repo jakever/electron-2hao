@@ -1,27 +1,30 @@
 import "babel-polyfill"
-import {app, dialog, BrowserWindow} from 'electron'
+import { app, dialog, BrowserWindow, session } from 'electron'
 import path from 'path'
 import url from 'url'
 import request from 'request'
 import fs from 'fs' 
 import mTray from './tray'
 import menu from './menu'
-import checkUpdate from './update'
+// import checkUpdate from './update'
 
 let mainWindow
 let tray = null
-let checked = false
+// let checked = false
 
-// 自动更新
-app.on('will-finish-launching', () => {
-
-})
 app.on('ready', createWindow)
 app.on('activate', function () {
     if (mainWindow === null) {
         createWindow()
     }
 })
+app.on('window-all-closed', function(e) {
+    // 在 OS X 上，通常用户在明确地按下 Cmd + Q 之前
+    // 应用会保持活动状态
+    if (process.platform != 'darwin') {
+        app.quit();
+    }
+});
 
 // 创建主窗口
 function createWindow() {
@@ -36,9 +39,9 @@ function createWindow() {
             defaultFontSize: 14
         }
     })
-    mainWindow.loadURL('https://2haohr.com/login')
+    mainWindow.loadURL('https://2haohr.com')
     // mainWindow.loadURL(url.format({
-    //     pathname: resolve('../app/index.html'),
+    //     pathname: path.resolve('file://', __dirname, '../app/index.html'),
     //     protocol: 'file:',
     //     slashes: true
     // }))
@@ -55,9 +58,9 @@ function createWindow() {
         event.newGuest = win
     })
 
-    mainWindow.on('close', function (e) {
-        // e.preventDefault()  // 阻止关闭
-    })
+    // mainWindow.on('close', function (e) {
+    //     e.preventDefault()  // 阻止关闭
+    // })
     mainWindow.on('closed', function () {
         mainWindow = null
         tray.destroy();
@@ -71,6 +74,7 @@ function createWindow() {
     //         });
     //     }
     // });
+
     //客户端对于下载文件重命名时，对于文件扩展名的处理会不那么友好，做如下处理
     mainWindow.webContents.session.on('will-download', (e, item) => {
         //获取文件的总大小
@@ -86,7 +90,7 @@ function createWindow() {
                 defaultPath: filePath,
                 nameFieldLabel: fileName,
                 filters: [
-                    { name: fileName, extensions: ext }
+                    { name: fileName, extensions: ext.substr(1) }
                 ]
             }, fname => {
                 if(fname){
@@ -106,7 +110,7 @@ function createWindow() {
         }
     });
     tray = new mTray(app,mainWindow)
-    menu(app,mainWindow)
+    menu(app, mainWindow)
     app.setLoginItemSettings({ //设置开启启动
         openAtLogin: true,
         openAsHidden: true
