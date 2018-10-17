@@ -35,7 +35,14 @@
       "icon": "build/icon.ico"
     },
     "linux": {
-      "target": "deb"
+      "target": [
+        {
+          "target": "deb"
+        }
+      ]
+    },
+    "mac": {
+      "target": "dmg"
     },
     "dmg": {
       "iconSize": 60,
