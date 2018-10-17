@@ -111,8 +111,8 @@ function createWindow() {
     });
     tray = new mTray(app,mainWindow)
     menu(app, mainWindow)
-    app.setLoginItemSettings({ //设置开启启动
-        openAtLogin: true,
-        openAsHidden: true
-    })
+    // app.setLoginItemSettings({ //设置开启启动
+    //     openAtLogin: true,
+    //     openAsHidden: true
+    // })
 }

@@ -37,9 +37,6 @@
     "linux": {
       "target": "deb"
     },
-    "mac": {
-      "target": "dmg"
-    },
     "dmg": {
       "iconSize": 60,
       "window": {
