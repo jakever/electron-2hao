@@ -92,17 +92,17 @@ export default async (app, main)=> {
                {label: '检查更新', click: function(){
                    checkUpdate()
                }},
-               {label: '开机启动', click: async function() {
-                    let enabled = await appLauncher.isEnabled()
-                    if(enabled) {
-                        return appLauncher.disable()
-                    } else {
-                        return appLauncher.enable()
-                    }
-                }, 
-                type: 'checkbox',
-                checked: await appLauncher.isEnabled()
-                },
+            //    {label: '开机启动', click: async function() {
+            //         let enabled = await appLauncher.isEnabled()
+            //         if(enabled) {
+            //             return appLauncher.disable()
+            //         } else {
+            //             return appLauncher.enable()
+            //         }
+            //     }, 
+            //     type: 'checkbox',
+            //     checked: await appLauncher.isEnabled()
+            //     },
                {role: 'quit', label: '退出', accelerator: 'CmdOrCtrl+Q'}
             ]
         })
