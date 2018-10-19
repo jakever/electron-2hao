@@ -60,7 +60,7 @@ export default async (app, main)=> {
              ]
          }
     ];
-    if (process.platform === 'darwin') {
+    if (process.platform === 'darwin') { //mac
          menus.unshift({
              label: app.getName(),
              submenu: [
@@ -82,7 +82,7 @@ export default async (app, main)=> {
                 type: 'checkbox',
                 checked: await appLauncher.isEnabled()
                 },
-                {role: 'quit', label: '退出', accelerator: 'CmdOrCtrl+Q'}
+                {role: 'quit', label: '退出', accelerator: 'Cmd+Q'}
              ]
          })
      }else{
@@ -92,18 +92,18 @@ export default async (app, main)=> {
                {label: '检查更新', click: function(){
                    checkUpdate()
                }},
-            //    {label: '开机启动', click: async function() {
-            //         let enabled = await appLauncher.isEnabled()
-            //         if(enabled) {
-            //             return appLauncher.disable()
-            //         } else {
-            //             return appLauncher.enable()
-            //         }
-            //     }, 
-            //     type: 'checkbox',
-            //     checked: await appLauncher.isEnabled()
-            //     },
-               {role: 'quit', label: '退出', accelerator: 'CmdOrCtrl+Q'}
+                {label: '开机启动', click: async function() {
+                     let enabled = await appLauncher.isEnabled()
+                     if(enabled) {
+                         return appLauncher.disable()
+                     } else {
+                         return appLauncher.enable()
+                     }
+                 }, 
+                 type: 'checkbox',
+                 checked: await appLauncher.isEnabled()
+                 },
+               {role: 'quit', label: '退出', accelerator: 'Ctrl+Shift+Q'}
             ]
         })
      }
