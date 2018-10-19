@@ -12,7 +12,7 @@ let config = {
     defaultId: 0
 }
 export default ()=> {
-    return Promise.resolve(axios.get('https://2haohr.com/update.json').then(function(response) {
+    return Promise.resolve(axios.get('https://www.2haohr.com/update.json').then(function(response) {
         let version = response.data.version;
         if(appVersion < version){ //有新版本
             config.buttons = ['暂不更新','去更新'];
@@ -20,7 +20,7 @@ export default ()=> {
             config.defaultId = 1;
             dialog.showMessageBox(config, function(cancelId, f){
                 if(cancelId){
-                    shell.openExternal('https://2haohr.com/clients')
+                    shell.openExternal('https://www.2haohr.com/clients')
                 }
             })
             return {checked: true, has: true}; //第一次打开检查更新，若有更新则提示
