@@ -46,16 +46,16 @@ function createWindow() {
     //     slashes: true
     // }))
 
-    mainWindow.webContents.on('new-window', (event, url) => {
+    mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
         event.preventDefault()
-        const win = new BrowserWindow({
-            show: false,
-            width: 800,
-            height: 600
+        
+        Object.assign(options, {
+            modal: false,
+            parent: mainWindow,
+            width: 1366,
+            height: 800
         })
-        win.once('ready-to-show', () => win.show())
-        win.loadURL(url)
-        event.newGuest = win
+        event.newGuest = new BrowserWindow(options)
     })
 
     // mainWindow.on('close', function (e) {
