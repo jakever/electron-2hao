@@ -39,7 +39,7 @@ function createWindow() {
             defaultFontSize: 14
         }
     })
-    mainWindow.loadURL('https://2haohr.com')
+    mainWindow.loadURL('https://test.2haohr.com')
     // mainWindow.loadURL(url.format({
     //     pathname: path.resolve('file://', __dirname, '../app/index.html'),
     //     protocol: 'file:',
