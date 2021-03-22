@@ -1,6 +1,6 @@
 {
   "name": "2HaoHR",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "A 2HaoHR Electron application",
   "main": "dist/main.js",
   "title": "2号人事部",
@@ -70,14 +70,14 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
-    "electron": "^3.0.4",
-    "electron-builder": "^19.48.2",
+    "electron": "^12.0.0",
+    "electron-builder": "^22.8.0",
     "node-notifier": "^5.1.2"
   },
   "dependencies": {
-    "babel-polyfill": "^6.23.0",
     "auto-launch": "^5.0.5",
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
     "fs": "0.0.1-security",
     "request": "^2.83.0",
     "shelljs": "^0.7.8"

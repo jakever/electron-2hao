@@ -12,6 +12,8 @@ let mainWindow
 let tray = null
 // let checked = false
 
+console.log(process.versions.chrome, '999~~~');
+
 app.on('ready', createWindow)
 app.on('activate', function () {
     if (mainWindow === null) {
@@ -39,7 +41,7 @@ function createWindow() {
             defaultFontSize: 14
         }
     })
-    mainWindow.loadURL('https://test.2haohr.com')
+    mainWindow.loadURL('https://2haohr.com')
     // mainWindow.loadURL(url.format({
     //     pathname: path.resolve('file://', __dirname, '../app/index.html'),
     //     protocol: 'file:',
