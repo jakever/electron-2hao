@@ -1,18 +1,64 @@
 import "babel-polyfill"
-import { app, dialog, BrowserWindow, session } from 'electron'
+import { app, dialog, BrowserWindow, Notification } from 'electron'
 import path from 'path'
-import url from 'url'
 import request from 'request'
 import fs from 'fs' 
 import mTray from './tray'
 import menu from './menu'
 // import checkUpdate from './update'
+const PROTOCOL = 'electron'
 
 let mainWindow
 let tray = null
 // let checked = false
 
-console.log(process.versions.chrome, '999~~~');
+console.log('谷歌版本号：', process.versions.chrome);
+
+// 获取单实例锁
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  // 如果获取失败，说明已经有实例在运行了，直接退出
+  app.quit();
+}
+
+// 对当前主机进行注册/写入协议
+app.setAsDefaultProtocolClient(PROTOCOL)
+
+// 如果唤起的时候，没有其他实例，则以当前实例作为主实例，处理唤起url中的参数
+handleArgv(process.argv)
+
+// // 其他实例启动时，主实例会通过 second-instance 事件接收其他实例的启动参数 `argv`
+app.on('second-instance', (event, argv) => {
+    if (process.platform === 'win32') { // for windows
+        handleArgv(argv)
+    }
+})
+  
+//  macOS 下通过协议URL启动时，主实例会通过 open-url 事件接收这个 URL
+app.on('open-url', (event, urlStr) => {
+    handleUrl(urlStr)
+})
+
+function toast(data) {
+    new Notification({ title: data.title, body: data.body }).show()
+}
+
+function handleArgv(argv) {
+    console.log(argv, 1)
+    const prefix = `${PROTOCOL}:`;
+    const offset = app.isPackaged ? 1 : 2; // app.isPackaged用来区分开发阶段及包阶段
+    const url = argv.find((arg, i) => i >= offset && arg.startsWith(prefix));
+    if (url) handleUrl(url);
+}
+function handleUrl(urlStr) {
+    console.log(urlStr, 2)
+    // electron://?name=1&pwd=2
+    const urlObj = new URL(urlStr);
+    const { searchParams } = urlObj;
+    console.log(urlObj.search); // -> ?name=1&pwd=2
+    console.log(searchParams.get('name')); // -> 1
+    console.log(searchParams.get('pwd')); // -> 2
+}
 
 app.on('ready', createWindow)
 app.on('activate', function () {
@@ -42,11 +88,6 @@ function createWindow() {
         }
     })
     mainWindow.loadURL('https://2haohr.com')
-    // mainWindow.loadURL(url.format({
-    //     pathname: path.resolve('file://', __dirname, '../app/index.html'),
-    //     protocol: 'file:',
-    //     slashes: true
-    // }))
 
     mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
         event.preventDefault()
